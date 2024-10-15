@@ -2,7 +2,7 @@
   "name": "smtp",
   "version": "1.2.15",
   "scripts": {
-    "build": "pnpm generate && next build",
+    "build": "pnpm generate && next build -p 3005",
     "check-types": "tsc --noEmit",
     "deploy": "tsx --require dotenv/config ./scripts/deploy.ts",
     "dev": "pnpm generate && NODE_OPTIONS='--inspect' next dev",
@@ -95,6 +95,10 @@
   "private": true,
   "saleor": {
     "schemaVersion": "3.19"
+  },
+  "engines": {
+    "node": ">=18.17.0 <=20",
+    "pnpm": ">=9"
   },
   "type": "module"
 }
