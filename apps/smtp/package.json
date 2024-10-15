@@ -29,7 +29,7 @@
     "@opentelemetry/sdk-trace-base": "../../node_modules/@opentelemetry/sdk-trace-base",
     "@opentelemetry/sdk-trace-node": "../../node_modules/@opentelemetry/sdk-trace-node",
     "@opentelemetry/semantic-conventions": "../../node_modules/@opentelemetry/semantic-conventions",
-    "@saleor/app-sdk": "../../node_modules/@saleor/app-sdk",
+    "@saleor/app-sdk": "link:../../node_modules/@saleor/app-sdk",
     "@saleor/apps-logger": "workspace:*",
     "@saleor/apps-otel": "workspace:*",
     "@saleor/apps-shared": "workspace:*",
@@ -97,9 +97,8 @@
     "schemaVersion": "3.19"
   },
   "engines": {
-    "node": "20.14.0",
-    "pnpm": "9.11.0",
-    "npm": "10.8.1"
+    "node": "20.14.0"
   },
+  "packageManager": "pnpm@9.11.0",
   "type": "module"
 }
