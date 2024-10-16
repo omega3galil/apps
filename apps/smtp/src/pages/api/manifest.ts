@@ -1,19 +1,33 @@
 import { createManifestHandler } from "@saleor/app-sdk/handlers/next";
 import { AppManifest } from "@saleor/app-sdk/types";
+import { withOtel } from "@saleor/apps-otel";
 
 import packageJson from "../../../package.json";
-import { withOtel } from "@saleor/apps-otel";
+import { AppId } from "../../const";
 
 export default withOtel(
   createManifestHandler({
     async manifestFactory({ appBaseUrl }) {
-      const iframeBaseUrl = process.env.APP_IFRAME_BASE_URL ?? appBaseUrl;
-      const apiBaseURL = process.env.APP_API_BASE_URL ?? appBaseUrl;
+      const iframeBaseURL: string =
+        process.env.APP_IFRAME_BASE_URL !== undefined &&
+        process.env.APP_IFRAME_BASE_URL !== null &&
+        typeof process.env.APP_IFRAME_BASE_URL === "string" &&
+        process.env.APP_IFRAME_BASE_URL.trim.length > 0
+          ? process.env.APP_IFRAME_BASE_URL
+          : appBaseUrl;
+
+      const apiBaseURL: string =
+        process.env.APP_API_BASE_URL !== undefined &&
+        process.env.APP_API_BASE_URL !== null &&
+        typeof process.env.APP_API_BASE_URL === "string" &&
+        process.env.APP_API_BASE_URL.trim.length > 0
+          ? process.env.APP_API_BASE_URL
+          : appBaseUrl;
 
       const manifest: AppManifest = {
         about:
           "SMTP App is a Saleor integration that allows you to send emails using your own SMTP server.",
-        appUrl: iframeBaseUrl,
+        appUrl: iframeBaseURL,
         author: "Saleor Commerce",
         brand: {
           logo: {
@@ -28,7 +42,7 @@ export default withOtel(
            */
         ],
         homepageUrl: "https://github.com/saleor/apps",
-        id: "saleor.app.smtp",
+        id: AppId,
         name: "SMTP",
         permissions: ["MANAGE_ORDERS", "MANAGE_USERS", "MANAGE_GIFT_CARD"],
         requiredSaleorVersion: ">=3.19 <4",

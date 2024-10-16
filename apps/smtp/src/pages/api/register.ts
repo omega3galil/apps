@@ -1,13 +1,13 @@
 import { createAppRegisterHandler } from "@saleor/app-sdk/handlers/next";
-
+import { wrapWithLoggerContext } from "@saleor/apps-logger/node";
 import { withOtel } from "@saleor/apps-otel";
 import { SaleorVersionCompatibilityValidator } from "@saleor/apps-shared";
+
 import { createInstrumentedGraphqlClient } from "../../lib/create-instrumented-graphql-client";
 import { createLogger } from "../../logger";
+import { loggerContext } from "../../logger-context";
 import { fetchSaleorVersion } from "../../modules/feature-flag-service/fetch-saleor-version";
 import { REQUIRED_SALEOR_VERSION, saleorApp } from "../../saleor-app";
-import { loggerContext } from "../../logger-context";
-import { wrapWithLoggerContext } from "@saleor/apps-logger/node";
 
 const allowedUrlsPattern = process.env.ALLOWED_DOMAIN_PATTERN;
 
@@ -27,7 +27,10 @@ export default wrapWithLoggerContext(
             return regex.test(url);
           }
 
-          return true;
+          return (
+            url === "https://omega3galil-store-icmgh.ondigitalocean.app/graphql/" ||
+            url === "https://omega-3-galil-store.eu.saleor.cloud/graphql/"
+          );
         },
       ],
       async onRequestVerified(req, { authData: { token, saleorApiUrl }, respondWithError }) {

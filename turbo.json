@@ -34,6 +34,10 @@
       "inputs": ["src"],
       "outputs": []
     },
+    "start": {
+      "persistent": true,
+      "cache": false
+    },
     "dev": {
       "persistent": true,
       "cache": false

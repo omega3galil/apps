@@ -24,7 +24,12 @@
         "SENTRY_AUTH_TOKEN",
         "SENTRY_PROJECT",
         "SENTRY_ORG",
-        "NEXT_PUBLIC_SENTRY_DSN"
+        "NEXT_PUBLIC_SENTRY_DSN",
+        "DEBUG",
+        "REDIS_CONNECTION_STRING",
+        "UNIQUE_REDIS_RECORD_KEY",
+        "APP_IFRAME_BASE_URL",
+        "APP_API_BASE_URL"
       ]
     }
   }

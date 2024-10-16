@@ -1,11 +1,27 @@
 import { APL, FileAPL, SaleorCloudAPL, UpstashAPL } from "@saleor/app-sdk/APL";
 import { SaleorApp } from "@saleor/app-sdk/saleor-app";
 
+import { RedisAPL } from "./lib/redis-apl";
+
 const aplType = process.env.APL ?? "file";
 
 export let apl: APL;
 
 switch (aplType) {
+  case "redis":
+    const uniqueKey = process.env.UNIQUE_REDIS_RECORD_KEY || undefined;
+    const connectionString = process.env.REDIS_CONNECTION_STRING || undefined;
+
+    if (uniqueKey === undefined || connectionString === undefined) {
+      apl = new FileAPL();
+    } else {
+      apl = new RedisAPL({
+        uniqueRedisRecordKey: uniqueKey,
+        redisConnectionString: connectionString,
+      });
+    }
+
+    break;
   case "upstash":
     apl = new UpstashAPL();
 
